@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.btnManage = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.selected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnCalculator = new System.Windows.Forms.Button();
+            this.selected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,17 +52,18 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             // 
-            // selected
-            // 
-            resources.ApplyResources(this.selected, "selected");
-            this.selected.Name = "selected";
-            // 
             // btnCalculator
             // 
             resources.ApplyResources(this.btnCalculator, "btnCalculator");
             this.btnCalculator.Name = "btnCalculator";
             this.btnCalculator.UseVisualStyleBackColor = true;
             this.btnCalculator.Click += new System.EventHandler(this.btnCalculator_Click);
+            // 
+            // selected
+            // 
+            this.selected.FalseValue = "";
+            resources.ApplyResources(this.selected, "selected");
+            this.selected.Name = "selected";
             // 
             // MainWindow
             // 
@@ -82,7 +83,7 @@
 
         private System.Windows.Forms.Button btnManage;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn selected;
         private System.Windows.Forms.Button btnCalculator;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn selected;
     }
 }

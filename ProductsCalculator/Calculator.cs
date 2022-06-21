@@ -12,9 +12,18 @@ namespace ProductsCalculator
 {
     public partial class Calculator : Form
     {
+
+        public List<Product> products;
+        public string pp;
         public Calculator()
         {
             InitializeComponent();
+
+         
         }
+
+
+
+  
     }
 }
