@@ -342,5 +342,17 @@ namespace ProductsCalculator
             ds.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "name", tbSearch.Text);
             dataGridView1.DataSource = ds;
         }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            var mainWindow = new MainWindow();
+
+
+
+            this.Hide();
+            mainWindow.ShowDialog();
+            this.Close();
+
+        }
     }
 }
