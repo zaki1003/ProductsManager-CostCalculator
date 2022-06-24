@@ -63,7 +63,12 @@ namespace ProductsCalculator
                 int result = ExecuteWrite(query, args);
 
 
-            dataGridView1.Rows.Clear();
+            //  dataGridView1.Rows.Clear();
+            ds.Rows.Clear();
+            dataGridView1.DataSource = ds;
+
+
+
             con.Close();
             data_show();
 
@@ -312,7 +317,7 @@ namespace ProductsCalculator
                 cmd.ExecuteNonQuery();
                
 
-                //    dataGridView1.Rows.Clear();
+         
                 ds.Rows.Clear();
                 dataGridView1.DataSource = ds;
 
