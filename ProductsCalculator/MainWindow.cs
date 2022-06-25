@@ -15,7 +15,7 @@ namespace ProductsCalculator
     {
 
         string text = "";
-        Calculator cal;
+        NavigationForm cal;
         Product prod;
         List<Product> products;
 
@@ -37,6 +37,7 @@ namespace ProductsCalculator
 
               ds.Columns.Add("Id", typeof(int));
             ds.Columns.Add("Name", typeof(string));
+            ds.Columns.Add("Unit", typeof(string));
             ds.Columns.Add("Store", typeof(string));
             ds.Columns.Add("Price", typeof(float));
 
@@ -57,6 +58,7 @@ namespace ProductsCalculator
             ds2.Columns.Add("Quantité", typeof(int));
             ds2.Columns.Add("id", typeof(int));
             ds2.Columns.Add("Name", typeof(string));
+            ds2.Columns.Add("Unit", typeof(string));
             ds2.Columns.Add("Store", typeof(string));
             ds2.Columns.Add("Price", typeof(float));
 
@@ -75,7 +77,7 @@ namespace ProductsCalculator
                 if (Convert.ToBoolean(row.Cells["selected"].Value))
                 {
                     text += row.Cells[1].Value.ToString() + ",";
-                    ds2.Rows.Add(new object[] {0, row.Cells["id"].Value,row.Cells["name"].Value, row.Cells["store"].Value, row.Cells["price"].Value });
+                    ds2.Rows.Add(new object[] {0, row.Cells["id"].Value,row.Cells["name"].Value, row.Cells["unit"].Value, row.Cells["store"].Value, row.Cells["price"].Value });
                     
 
 
@@ -136,7 +138,7 @@ namespace ProductsCalculator
 
             while (dr.Read())
             {
-               ds.Rows.Add(new object[] { dr["id"], dr["name"], dr["store"], dr["price"] });
+               ds.Rows.Add(new object[] { dr["id"], dr["name"], dr["unit"], dr["store"], dr["price"] });
                dataGridView1.DataSource = ds;
 }
             
@@ -178,7 +180,7 @@ namespace ProductsCalculator
 
             for (int i = 0; i < dataGridView2.Rows.Count - 1; i++) {
 
-                cost += Convert.ToDouble(dataGridView2.Rows[i].Cells[0].Value.ToString()) * Convert.ToDouble(dataGridView2.Rows[i].Cells[4].Value.ToString());
+                cost += Convert.ToDouble(dataGridView2.Rows[i].Cells[0].Value.ToString()) * Convert.ToDouble(dataGridView2.Rows[i].Cells[5].Value.ToString());
 
 
             }
@@ -211,6 +213,18 @@ namespace ProductsCalculator
 
 
         }
-       
+
+
+
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+   
+        }
     }
 }

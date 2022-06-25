@@ -38,6 +38,7 @@ namespace ProductsCalculator
             _products = new List<Product>();
             ds.Columns.Add("Id", typeof(int));
             ds.Columns.Add("Name", typeof(string));
+            ds.Columns.Add("Unit", typeof(string));
             ds.Columns.Add("Store", typeof(string));
             ds.Columns.Add("Price", typeof(float));
         }
@@ -49,13 +50,14 @@ namespace ProductsCalculator
           
 
 
-                const string query = "INSERT INTO products(Name, Store,Price) VALUES(@name, @store,@price)";
+                const string query = "INSERT INTO products(Name,Unit, Store,Price) VALUES(@name,@unit, @store,@price)";
 
                 //here we are setting the parameter values that will be actually 
                 //replaced in the query in Execute method
                 var args = new Dictionary<string, object>
         {
             {"@name",tbName.Text},
+            {"@unit",tbUnit.Text},
             {"@store",  tbMagasin.Text},
                       {"@price",  tbPrice.Text}
         };
@@ -111,7 +113,7 @@ namespace ProductsCalculator
 
 
               
-                ds.Rows.Add(new object[] { dr["id"], dr["name"], dr["store"], dr["price"] });
+                ds.Rows.Add(new object[] { dr["id"], dr["name"], dr["unit"], dr["store"], dr["price"] });
 
 
                 dataGridView1.DataSource = ds;
@@ -145,6 +147,7 @@ namespace ProductsCalculator
                var prod = new Product
               (Convert.ToInt32(dt.Rows[0]["Id"]),
                    Convert.ToString(dt.Rows[0]["Name"]),
+                   Convert.ToString(dt.Rows[0]["Unit"]),
                     Convert.ToString(dt.Rows[0]["Store"]), Convert.ToInt32(dt.Rows[4]["Price"]));
 
                return prod;
@@ -218,7 +221,7 @@ namespace ProductsCalculator
                 using (var sqlite = new SQLiteConnection(@"Data Source=" + path))
                 {
                     sqlite.Open();
-                    string sql = "create table products(id INTEGER NOT NULL UNIQUE ,name varchar(50) NOT NULL,store varchar(50) NOT NULL , price real ot null , primary key (id autoincrement) )";
+                    string sql = "create table products(id INTEGER NOT NULL UNIQUE ,name varchar(50) NOT NULL,unit varchar(50) NOT NULL,store varchar(50) NOT NULL , price real ot null , primary key (id autoincrement) )";
 
 
 
@@ -288,6 +291,7 @@ namespace ProductsCalculator
                 product_id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].FormattedValue.ToString());
                 dataGridView1.CurrentRow.Selected = true;
                 tbName.Text = dataGridView1.Rows[e.RowIndex].Cells["name"].FormattedValue.ToString();
+                tbUnit.Text = dataGridView1.Rows[e.RowIndex].Cells["unit"].FormattedValue.ToString();
                 tbMagasin.Text = dataGridView1.Rows[e.RowIndex].Cells["store"].FormattedValue.ToString();
                 tbPrice.Text = dataGridView1.Rows[e.RowIndex].Cells["price"].FormattedValue.ToString();
                 Console.WriteLine("id" + product_id);
@@ -311,6 +315,7 @@ namespace ProductsCalculator
                 cmd.Prepare();
             cmd.Parameters.AddWithValue("@Id", product_id);
             cmd.Parameters.AddWithValue("@Name", tbName.Text);
+                cmd.Parameters.AddWithValue("@Unit", tbUnit.Text);
                 cmd.Parameters.AddWithValue("@Store", tbMagasin.Text);
                 cmd.Parameters.AddWithValue("@Price", tbPrice.Text);
 
@@ -357,6 +362,11 @@ namespace ProductsCalculator
             this.Hide();
             mainWindow.ShowDialog();
             this.Close();
+
+        }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }
