@@ -16,7 +16,7 @@ namespace ProductsCalculator
 
         //path of data base
         string path = "products.db";
-        string cs = @"URI=file:" + Application.StartupPath + "\\data_table.db"; //database creat debug folder
+      //  string cs = @"URI=file:" + Application.StartupPath + "\\data_table.db"; //database creat debug folder
         int product_id = 0;
  
         SQLiteConnection con =  new SQLiteConnection("Data Source=products.db");
@@ -36,11 +36,21 @@ namespace ProductsCalculator
             InitializeComponent();
 
             _products = new List<Product>();
+            /*  ds.Columns.Add("Id", typeof(int));
+              ds.Columns.Add("Name", typeof(string));
+              ds.Columns.Add("Unit", typeof(string));
+              ds.Columns.Add("Store", typeof(string));
+              ds.Columns.Add("Price", typeof(float));*/
+
+
             ds.Columns.Add("Id", typeof(int));
-            ds.Columns.Add("Name", typeof(string));
-            ds.Columns.Add("Unit", typeof(string));
-            ds.Columns.Add("Store", typeof(string));
-            ds.Columns.Add("Price", typeof(float));
+            ds.Columns.Add("Nom", typeof(string));
+            ds.Columns.Add("Unité", typeof(string));
+            ds.Columns.Add("Magasin", typeof(string));
+            ds.Columns.Add("Prix", typeof(float));
+
+
+
         }
 
        
@@ -245,33 +255,52 @@ namespace ProductsCalculator
         private void btnDelete_Click(object sender, EventArgs e)
         {
 
-         //  var con = new SQLiteConnection(path);
-          //con.Open();
 
-            var cmd = new SQLiteCommand(con);
 
-           try
+
+        string message = "Voulez-vous supprimer le produit?";
+            string title = "Supprimer le produit";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
             {
-            cmd.CommandText = "DELETE FROM products where id =@Id";
-            cmd.Prepare();
-                cmd.Parameters.AddWithValue("@Id", product_id);
-
-                cmd.ExecuteNonQuery();
-
-            //    dataGridView1.Rows.Clear();
-            ds.Rows.Clear();
-            dataGridView1.DataSource = ds;
 
 
-           
-            con.Close();
-            data_show();
-        }
-            catch (Exception)
-            {
-                Console.WriteLine("cannot delete data");
-                return;
+                var cmd = new SQLiteCommand(con);
+
+                try
+                {
+                    cmd.CommandText = "DELETE FROM products where id =@Id";
+                    cmd.Prepare();
+                    cmd.Parameters.AddWithValue("@Id", product_id);
+
+                    cmd.ExecuteNonQuery();
+
+                    //    dataGridView1.Rows.Clear();
+                    ds.Rows.Clear();
+                    dataGridView1.DataSource = ds;
+
+
+
+                    con.Close();
+                    data_show();
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("cannot delete data");
+                    return;
+                }
+        
+          
+            
+            
             }
+            else
+            {
+                //this.Close();
+            }
+
+
 
         }
 
@@ -290,10 +319,10 @@ namespace ProductsCalculator
             {
                 product_id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].FormattedValue.ToString());
                 dataGridView1.CurrentRow.Selected = true;
-                tbName.Text = dataGridView1.Rows[e.RowIndex].Cells["name"].FormattedValue.ToString();
-                tbUnit.Text = dataGridView1.Rows[e.RowIndex].Cells["unit"].FormattedValue.ToString();
-                tbMagasin.Text = dataGridView1.Rows[e.RowIndex].Cells["store"].FormattedValue.ToString();
-                tbPrice.Text = dataGridView1.Rows[e.RowIndex].Cells["price"].FormattedValue.ToString();
+                tbName.Text = dataGridView1.Rows[e.RowIndex].Cells["nom"].FormattedValue.ToString();
+                tbUnit.Text = dataGridView1.Rows[e.RowIndex].Cells["unité"].FormattedValue.ToString();
+                tbMagasin.Text = dataGridView1.Rows[e.RowIndex].Cells["magasin"].FormattedValue.ToString();
+                tbPrice.Text = dataGridView1.Rows[e.RowIndex].Cells["prix"].FormattedValue.ToString();
                 Console.WriteLine("id" + product_id);
             }
 
@@ -311,7 +340,7 @@ namespace ProductsCalculator
 
           try
             {
-                cmd.CommandText = "UPDATE products Set name =@Name,store =@Store,price =@Price where id =@Id";
+                cmd.CommandText = "UPDATE products Set name =@Name,unit =@Unit,store =@Store,price =@Price where id =@Id";
                 cmd.Prepare();
             cmd.Parameters.AddWithValue("@Id", product_id);
             cmd.Parameters.AddWithValue("@Name", tbName.Text);
@@ -349,7 +378,7 @@ namespace ProductsCalculator
            // DataView dv;
         //   dv = new DataView(ds.Tables[0], "name = 'test' ", "type Desc", DataViewRowState.CurrentRows);
 
-            ds.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "name", tbSearch.Text);
+            ds.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "nom", tbSearch.Text);
             dataGridView1.DataSource = ds;
         }
 
@@ -365,9 +394,5 @@ namespace ProductsCalculator
 
         }
 
-        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

@@ -8,6 +8,8 @@ using System.Text;
 using System.Data.SQLite;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
+
 
 namespace ProductsCalculator
 {
@@ -35,13 +37,23 @@ namespace ProductsCalculator
         {
             InitializeComponent();
 
-              ds.Columns.Add("Id", typeof(int));
+          /*    ds.Columns.Add("Id", typeof(int));
             ds.Columns.Add("Name", typeof(string));
             ds.Columns.Add("Unit", typeof(string));
             ds.Columns.Add("Store", typeof(string));
-            ds.Columns.Add("Price", typeof(float));
+            ds.Columns.Add("Price", typeof(float));*/
 
-         dataGridView1.ReadOnly = true;
+
+
+            ds.Columns.Add("Id", typeof(int));
+            ds.Columns.Add("Nom", typeof(string));
+            ds.Columns.Add("Unité", typeof(string));
+            ds.Columns.Add("Magasin", typeof(string));
+            ds.Columns.Add("Prix", typeof(float));
+
+
+
+            dataGridView1.ReadOnly = true;
 
             //Add a CheckBox Column to the DataGridView at the first position.
             DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
@@ -55,12 +67,21 @@ namespace ProductsCalculator
             dataGridView1.CellContentClick += new DataGridViewCellEventHandler(DataGridView_CellClick);
 
 
+            /*  ds2.Columns.Add("Quantité", typeof(int));
+              ds2.Columns.Add("id", typeof(int));
+              ds2.Columns.Add("Name", typeof(string));
+              ds2.Columns.Add("Unit", typeof(string));
+              ds2.Columns.Add("Store", typeof(string));
+              ds2.Columns.Add("Price", typeof(float));*/
+
+
             ds2.Columns.Add("Quantité", typeof(int));
-            ds2.Columns.Add("id", typeof(int));
-            ds2.Columns.Add("Name", typeof(string));
-            ds2.Columns.Add("Unit", typeof(string));
-            ds2.Columns.Add("Store", typeof(string));
-            ds2.Columns.Add("Price", typeof(float));
+            ds2.Columns.Add("Id", typeof(int));
+            ds2.Columns.Add("Nom", typeof(string));
+            ds2.Columns.Add("Unité", typeof(string));
+            ds2.Columns.Add("Magasin", typeof(string));
+            ds2.Columns.Add("Prix", typeof(float));
+
 
 
 
@@ -77,7 +98,7 @@ namespace ProductsCalculator
                 if (Convert.ToBoolean(row.Cells["selected"].Value))
                 {
                     text += row.Cells[1].Value.ToString() + ",";
-                    ds2.Rows.Add(new object[] {0, row.Cells["id"].Value,row.Cells["name"].Value, row.Cells["unit"].Value, row.Cells["store"].Value, row.Cells["price"].Value });
+                    ds2.Rows.Add(new object[] {0, row.Cells["id"].Value,row.Cells["nom"].Value, row.Cells["unité"].Value, row.Cells["magasin"].Value, row.Cells["prix"].Value });
                     
 
 
@@ -194,7 +215,7 @@ namespace ProductsCalculator
             private void btnSearch_Click(object sender, EventArgs e)
             {
 
-                ds.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "name", tbSearch.Text);
+                ds.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "nom", tbSearch.Text);
                 dataGridView1.DataSource = ds;
 
 
@@ -217,14 +238,99 @@ namespace ProductsCalculator
 
 
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+
+
+
+
+
+
+
+
+
+
+
+        private void btnExport_Click(object sender, EventArgs e)
         {
 
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-   
+            DataTable dt3 = new DataTable();
+
+
+            //Adding the Columns.
+            foreach (DataGridViewColumn column in dataGridView2.Columns)
+            {
+                dt3.Columns.Add(column.HeaderText, column.ValueType);
+            }
+
+            //Adding the Rows.
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                dt3.Rows.Add();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+              //  dt3.Rows[dt3.Rows.Count - 1][cell.ColumnIndex] = cell.Value.ToString();
+                }
+            }
+
+
+
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Excel Workbook|*.xlsx" })
+            {
+                if( sfd.ShowDialog()== DialogResult.OK)
+                {
+                    try
+                    {
+                        using(XLWorkbook workbook = new XLWorkbook())
+                        {
+
+
+                          var ws =   workbook.Worksheets.Add(ds2, "Produits");
+                            
+                            ws.Row(1).InsertRowsAbove(3);
+
+
+                            ws.Cell(1, 1).Value = "Nom du client: ";
+                            ws.Cell(1, 2).Value = tbClient.Text;
+
+
+                            ws.Cell(2, 1).Value = "Date: ";
+                            ws.Cell(2, 2).Value = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
+
+
+                            ws.Cell(3, 1).Value = "Montant: ";
+                            ws.Cell(3, 2).Value = lbCost.Text;
+
+
+                            ws.Range("A1:B1").Style.Font.FontColor = XLColor.White;
+                            ws.Range("A2:B2").Style.Font.FontColor = XLColor.White;
+                            ws.Range("A3:B3").Style.Font.FontColor = XLColor.White;
+                            ws.Range("A1:B1").Style.Fill.BackgroundColor = XLColor.DarkBlue;
+                            ws.Range("A2:B2").Style.Fill.BackgroundColor = XLColor.DarkBlue;
+                            ws.Range("A3:B3").Style.Fill.BackgroundColor = XLColor.DarkBlue;
+
+
+
+
+                            workbook.SaveAs(sfd.FileName);
+                        }
+                        MessageBox.Show("Vous avez réussi à exporter vos données vers un fichier Excel", "Message", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    }catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+
+                }
+
+
+            }
+
+
+
+
+
+
         }
     }
 }

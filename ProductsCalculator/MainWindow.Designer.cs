@@ -41,11 +41,16 @@
             this.lbCost = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbClient = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -56,7 +61,6 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // tbSearch
             // 
@@ -132,7 +136,33 @@
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label2, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 1, 4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // btnExport
+            // 
+            resources.ApplyResources(this.btnExport, "btnExport");
+            this.btnExport.Name = "btnExport";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // tableLayoutPanel4
+            // 
+            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.btnExport, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.tbClient, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            // 
+            // tbClient
+            // 
+            resources.ApplyResources(this.tbClient, "tbClient");
+            this.tbClient.Name = "tbClient";
             // 
             // MainWindow
             // 
@@ -149,7 +179,10 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -166,5 +199,9 @@
         private System.Windows.Forms.Button btnCalculator;
         private System.Windows.Forms.Label lbCost;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TextBox tbClient;
+        private System.Windows.Forms.Label label4;
     }
 }

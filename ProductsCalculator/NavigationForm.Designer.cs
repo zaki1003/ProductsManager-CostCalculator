@@ -100,6 +100,7 @@
             this.panelDesktopPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelDesktopPanel.AutoSize = true;
             this.panelDesktopPanel.Location = new System.Drawing.Point(375, 99);
             this.panelDesktopPanel.Name = "panelDesktopPanel";
             this.panelDesktopPanel.Size = new System.Drawing.Size(1272, 377);
@@ -142,6 +143,7 @@
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

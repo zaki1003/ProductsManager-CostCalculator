@@ -43,11 +43,11 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbUnit = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbUnit = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -190,9 +190,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.Location = new System.Drawing.Point(382, 0);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(30, 0, 10, 40);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(30, 0, 10, 20);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(313, 9);
+            this.btnSearch.Size = new System.Drawing.Size(313, 29);
             this.btnSearch.TabIndex = 12;
             this.btnSearch.Text = "Rechercher";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -261,7 +261,24 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(538, 250);
             this.tableLayoutPanel3.TabIndex = 15;
-            this.tableLayoutPanel3.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 25);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Unité :";
+            // 
+            // tbUnit
+            // 
+            this.tbUnit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbUnit.Location = new System.Drawing.Point(167, 53);
+            this.tbUnit.Name = "tbUnit";
+            this.tbUnit.Size = new System.Drawing.Size(294, 28);
+            this.tbUnit.TabIndex = 9;
             // 
             // tableLayoutPanel4
             // 
@@ -315,24 +332,6 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(1267, 487);
             this.tableLayoutPanel6.TabIndex = 18;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 25);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Unité :";
-            // 
-            // tbUnit
-            // 
-            this.tbUnit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbUnit.Location = new System.Drawing.Point(167, 53);
-            this.tbUnit.Name = "tbUnit";
-            this.tbUnit.Size = new System.Drawing.Size(294, 28);
-            this.tbUnit.TabIndex = 9;
             // 
             // ManageProducts
             // 
