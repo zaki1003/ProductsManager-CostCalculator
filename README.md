@@ -1,9 +1,10 @@
 # ProductsManagement-CostCalculator
-Products Management system with cost calculator using C# and SQLite.and save your data in a excel file.
+Products Management system with cost calculator using C# and SQLite.
 
 
 ## Features
 - Manage your products (Add,Update,Delete).
+- Using a portable SQLite database.
 - Calculate cost with an easy way.
 - when you buy some products you can save the data in a excel file with the client name
 
