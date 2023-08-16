@@ -1,4 +1,4 @@
-# ProductsManagement-CostCalculator
+# ProductsManager-CostCalculator
 Products Management system with cost calculator using C# and SQLite.
 
 
